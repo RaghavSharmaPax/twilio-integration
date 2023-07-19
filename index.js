@@ -12,6 +12,7 @@ app.use(
 );
 
 app.post('/', async (req, res) => {
+    console.log('req of post', req)
     console.log('request body', req.body);
     client.messages(req.body.MessageSid).update({ body: '' }).then(_msg => console.log('redacted body from logs')).catch(err => console.log('message redaction failed', err));
 
@@ -65,7 +66,7 @@ app.post('/', async (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    console.log('recieved in get request')
+    console.log('recieved in get request', req)
     res.send('Hello World!');
 });
 
