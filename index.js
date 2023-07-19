@@ -61,7 +61,7 @@ app.post('/', async (req, res) => {
             })
     }
 
-    return res;
+    return res.send();
 })
 
 app.get('/', (req, res) => {
