@@ -37,7 +37,7 @@ app.post('/', async (req, res) => {
             .then(message => {
                 console.log(message);
                 client.messages(message.sid).update({ body: '' }).then(_msg => console.log('redacted body from logs')).catch(err => console.log('message redaction failed', err));
-                return res.status(200);
+                return res.status(200).send()
             })
             .catch(error => {
                 console.log('Error in creating message', error);
@@ -53,7 +53,7 @@ app.post('/', async (req, res) => {
             .then(message => {
                 console.log(message);
                 client.messages(message.sid).update({ body: '' }).then(_msg => console.log('redacted body from logs')).catch(err => console.log('message redaction failed', err));
-                return res.status(200);
+                return res.status(200).send();
             })
             .catch(error => {
                 console.log('Error in creating message', error);
