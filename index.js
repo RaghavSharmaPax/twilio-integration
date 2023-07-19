@@ -65,15 +65,7 @@ app.post('/', async (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    client.messages
-        .create({
-            from: 'whatsapp:+14155238886',
-            body: 'Hello there!',
-            to: 'whatsapp:+918360088431'
-        })
-        .then(message => console.log(message.sid))
-        .catch(error => console.log('Error in creating message', error))
-
+    console.log('recieved in get request')
     res.send('Hello World!');
 });
 
