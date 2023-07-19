@@ -8,15 +8,12 @@ const client = Twilio(accountSid, authToken);
 const { MessagingResponse } = Twilio.twiml
 export { MessagingResponse }
 
-
-
-const webhookUrl = "https://gentle-houses-march.loca.lt"
-client.preview
-    .twilio
+client.chat.v2.services(process.env.TWILIO_MESSAGING_SERVICE_ID)
     .update({
-        smsUrl: webhookUrl
+        preWebhookUrl: process.env.TWILIO_WEBHOOK_URL,
+        postWebhookUrl: process.env.TWILIO_WEBHOOK_URL,
+        webhookMethod: 'POST'
     })
-    .then(sandbox => console.log('Webhook URL set for Twilio Sandbox:', sandbox.status))
-    .catch(error => console.error('Error updating webhook URL for Twilio Sandbox:', error.message));
+    .then(service => console.log(service.friendlyName));
 
 export default client;
