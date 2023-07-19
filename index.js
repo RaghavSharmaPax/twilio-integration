@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
         })
         .then(message => console.log(message.sid))
         .catch(error => console.log('Error in creating message', error))
-    return res;
+
     res.send('Hello World!');
 });
 
