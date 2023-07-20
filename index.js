@@ -10,6 +10,7 @@ app.use(
         extended: true,
     })
 );
+app.use(express.json())
 
 app.post('/', async (req, res) => {
     console.log('req of post', req)
