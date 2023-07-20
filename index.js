@@ -16,10 +16,10 @@ app.post('/', async (req, res) => {
     console.log('request body', req.body);
     client.messages(req.body.MessageSid).update({ body: '' }).then(_msg => console.log('redacted body from logs')).catch(err => console.log('message redaction failed', err));
 
-    const engineRes = await axios.post(`http://127.0.0.1:8080/chatbotEngine?` + new URLSearchParams({
-        JWT_TOKEN: `${process.env.CHATBOT_TOKEN}`
-    }), { "type": "static", "input": { "type": "text", "message": "General_Greetings", "logMessage": false }, "additionalData": { "source": "web", "tla": "abc" } })
-    console.log(engineRes.data)
+    // const engineRes = await axios.post(`http://127.0.0.1:8080/chatbotEngine?` + new URLSearchParams({
+    //     JWT_TOKEN: `${process.env.CHATBOT_TOKEN}`
+    // }), { "type": "static", "input": { "type": "text", "message": "General_Greetings", "logMessage": false }, "additionalData": { "source": "web", "tla": "abc" } })
+    // console.log(engineRes.data)
     if (req.body.Body === "Hi") {
         client.messages
             .create({
@@ -66,7 +66,7 @@ app.post('/', async (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    console.log('recieved in get request', req)
+    console.log('recieved in get request', req.body)
     res.send('Hello World!');
 });
 
