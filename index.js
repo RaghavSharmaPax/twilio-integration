@@ -1,6 +1,5 @@
-import axios from 'axios';
 import express from 'express';
-import client, { MessagingResponse } from './message-handler.js';
+import client, { Twilio } from './message-handler.js';
 
 const app = express();
 const port = 3120;
@@ -13,8 +12,12 @@ app.use(
 app.use(express.json())
 
 app.post('/', async (req, res) => {
-    console.log('req of post', req)
+    console.log('req of post', req.get('X-Twilio-Signature'))
     console.log('request body', req.body);
+
+    const isReqValid = Twilio.validateRequest(process.env.TWILIO_AUTH_TOKEN, req.get('X-Twilio-Signature'), process.env.TWILIO_WEBHOOK_URL, req.body)
+    console.log('Request validation ', isReqValid)
+
     client.messages(req.body.MessageSid).update({ body: '' }).then(_msg => console.log('redacted body from logs')).catch(err => console.log('message redaction failed', err));
 
     // const engineRes = await axios.post(`http://127.0.0.1:8080/chatbotEngine?` + new URLSearchParams({
